@@ -51,7 +51,7 @@ which can be found at http://bitconjurer.org/BitTorrent/protocol.html
 
 =head1 BUGS
 
-None that I know of.
+No error detection of bencoded data. Damaged input will most likely cause very bad things to happen, up to and including causeing the bdecode function to recurse infintly.
 
 =head1 AUTHOR & COPYRIGHT
 
@@ -65,12 +65,13 @@ same terms as Perl itself.
 
 use strict;
 use warnings;
+use bytes;
 
 BEGIN {
 	use Exporter ();
 	our ($VERSION, @ISA, @EXPORT, @EXPORT_OK, @EXPORT_FAIL, %EXPORT_TAGS);
 
-	$VERSION 	= 1.02;
+	$VERSION 	= 1.03;
 	@ISA		= qw(Exporter);
 	@EXPORT_OK	= qw(&bencode &bdecode);
 	@EXPORT_FAIL	= qw(&_dechunk);
@@ -81,6 +82,7 @@ our @EXPORT_OK;
 END { }
 
 sub bencode {
+	no locale;
 	my $item = shift;
 	my $line = '';
 	if(ref($item) eq 'HASH') {

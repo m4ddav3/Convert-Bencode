@@ -44,7 +44,9 @@ SEE ALSO
     http://bitconjurer.org/BitTorrent/protocol.html
 
 BUGS
-    None that I know of.
+    No error detection of bencoded data. Damaged input will most likely
+    cause very bad things to happen, up to and including causeing the
+    bdecode function to recurse infintly.
 
 AUTHOR & COPYRIGHT
     Created by R. Kyle Murphy <orclev@rejectedmaterial.com>, aka Orclev.

@@ -1,5 +1,3 @@
 TODO list for Perl module Convert::Bencode
 
-- Nothing yet
-
-
+- Need better error detection, as it stands now, a error in the bencoded data will probably cause bad things to happen.
