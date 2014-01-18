@@ -6,4 +6,5 @@ Todo
 Changes
 lib/Convert/Bencode.pm
 t/001_basic.t
+t/002_bdecode_bad_string.t
 Makefile.PL

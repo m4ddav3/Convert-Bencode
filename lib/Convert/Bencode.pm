@@ -71,7 +71,7 @@ BEGIN {
 	use Exporter ();
 	our ($VERSION, @ISA, @EXPORT, @EXPORT_OK, @EXPORT_FAIL, %EXPORT_TAGS);
 
-	$VERSION 	= 1.03;
+	$VERSION 	= 1.04;
 	@ISA		= qw(Exporter);
 	@EXPORT_OK	= qw(&bencode &bdecode);
 	@EXPORT_FAIL	= qw(&_dechunk);
@@ -131,7 +131,7 @@ sub _dechunk {
 			unshift(@{$chunks}, $item);
 			my $key = _dechunk($chunks);
 			$hash{$key} = _dechunk($chunks);
-			$item = shift(@{$chunks});
+			$item = shift(@{$chunks}) || last;
 		}
 		return \%hash;
 	}
@@ -141,7 +141,7 @@ sub _dechunk {
 		while($item ne 'e') {
 			unshift(@{$chunks}, $item);
 			push(@list, _dechunk($chunks));
-			$item = shift(@{$chunks});
+			$item = shift(@{$chunks}) || last;
 		}
 		return \@list;
 	}
@@ -150,7 +150,7 @@ sub _dechunk {
 		$item = shift(@{$chunks});
 		while($item ne 'e') {
 			$num .= $item;
-			$item = shift(@{$chunks});
+			$item = shift(@{$chunks}) || last;
 		}
 		return $num;
 	}

@@ -2,7 +2,7 @@
 
 # t/001_basic.t - check to make sure its all working
 
-use Test::More 'no_plan';
+use Test::More;
 
 BEGIN { use_ok( 'Convert::Bencode', qw(bdecode bencode) ); }
 
@@ -25,3 +25,5 @@ my $encoded_string = bencode($hashref);
 
 ok( defined $encoded_string, 'bencode() returned something' );
 is( $encoded_string, $test_string, '  and it appears to be the correct value' );
+
+done_testing();
