@@ -102,7 +102,7 @@ sub bencode {
 		$line .= 'e';
 		return $line;
 	}
-	if($item =~ /^\d+$/) {
+	if($item =~ /^(?:0|-?[1-9]\d*)$/) {
 		$line = 'i';
 		$line .= $item;
 		$line .= 'e';
